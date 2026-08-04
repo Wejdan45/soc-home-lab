@@ -267,7 +267,7 @@ PORT     STATE SERVICE VERSION
 5357/tcp open  http    Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
 Service Info: OS: Windows
 ```
-![Nmap scan result](screenshots/kali-nmap-scan-result.png)
+![Nmap scan result](kali-nmap-scan-result.png)
 
 Nmap successfully fingerprinted an open port and the target OS in ~33 seconds.
 
@@ -293,7 +293,7 @@ C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
   -NoProfile -WindowStyle Hidden -EncodedCommand
   VwByAGkAdABlAC0ASABvAHMAdAAgACcAUwBpAG0AdQBsAGEAdABlAGQAIABtAGEAbABpAGMAaQBvAHUAcwAgAGEAYwB0AGkAdgBpAHQAeQAnADsAIAB3AGgAbwBhAG0AaQA7...
 ```
-![Encoded PowerShell command — full detail](screenshots/kibana-encoded-powershell-fulldetail.png)
+![Encoded PowerShell command — full detail](kibana-encoded-powershell-fulldetail.png)
 
 This is a textbook indicator analysts look for: `-WindowStyle Hidden` combined with `-EncodedCommand` in the same process command line — flagged by nearly every commercial EDR's default detection ruleset.
 
@@ -319,7 +319,7 @@ process.name: powershell.exe
 destination.ip: 10.0.2.4
 destination.port: 5601
 ```
-![Sysmon network connection captured for the download cradle attempt](screenshots/kibana-download-cradle-network-connection.png)
+![Sysmon network connection captured for the download cradle attempt](kibana-download-cradle-network-connection.png)
 
 This confirms the earlier hypothesis from Simulation 1: Sysmon *does* log Event ID 3 connections — just only for **outbound** connections initiated by a local process, not for inbound scan traffic.
 
