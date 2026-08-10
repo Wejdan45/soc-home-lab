@@ -17,6 +17,7 @@ Each scenario documents a specific detection use case end-to-end: environment se
 | Hypervisor | Oracle VirtualBox |
 | SIEM Server | Ubuntu Server, Elasticsearch 9.4.4, Kibana 9.4.4, Fleet Server |
 | Endpoint | Windows 10 Pro, Elastic Agent 9.4.4, Sysmon (SwiftOnSecurity config) |
+| Web App | DVWA on XAMPP (Apache, MySQL, PHP 7.4), hosted on the monitored Windows endpoint |
 | Attacker | Kali Linux 2024.1 |
 | Network | VirtualBox NAT Network (isolated internal segment, `10.0.2.0/24`) |
 
@@ -28,6 +29,7 @@ Each scenario documents a specific detection use case end-to-end: environment se
 |---|---|---|---|
 | 1 | [Sysmon: Encoded PowerShell & Download Cradle Detection](scenario1-sysmon-encoded-powershell/README.md) | Endpoint telemetry, obfuscated PowerShell, fileless execution artifacts, MITRE ATT&CK mapping | ✅ Complete |
 | 2 | Port Scan Investigation & Custom Detection Rule | Windows Firewall (Event ID 5152), Kibana Security Threshold rule, alert-based detection | 🔨 In Progress |
+| 3 | [Web Application Attacks (DVWA) & PowerShell Script Block Logging](scenario3-dvwa-web-attacks/README.md) | DVWA/XAMPP setup, Apache log collection, SQL Injection, Reflected XSS, Command Injection, Script Block Logging (Event 4104) | ✅ Complete |
 
 More scenarios will be added here as the lab expands.
 
@@ -35,6 +37,6 @@ More scenarios will be added here as the lab expands.
 
 ## Author
 
-Built as a hands-on learning project in SOC fundamentals, log pipeline engineering, and endpoint/network detection with the Elastic Stack.
+Built as a hands-on learning project in SOC fundamentals, log pipeline engineering, and endpoint/network/web detection with the Elastic Stack.
 
 📍 Riyadh, Saudi Arabia · [LinkedIn](https://www.linkedin.com/in/wejdan-alhajeri12/) · [wejdanalhajeri99@gmail.com](mailto:wejdanalhajeri99@gmail.com)
