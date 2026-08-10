@@ -182,11 +182,11 @@ Under **Custom Filestream Logs → Paths**:
 C:\xampp\apache\logs\access.log
 ```
 
-![Filestream path configuration](fleet-apache-filestream-path-config.png)
+![Filestream path configuration]
 
 Integration name set to `apache-access-logs`, added to the `windows-victim-policy`:
 
-![Integration listed in the policy](fleet-integrations-list-apache-access-logs.png)
+![Integration listed in the policy]
 
 ### Verify data is arriving
 
@@ -195,7 +195,7 @@ Generated traffic by opening a DVWA page, then queried Kibana Discover:
 log.file.path: "C:\\xampp\\apache\\logs\\access.log"
 ```
 
-![Apache access logs arriving in Kibana Discover](kibana-apache-access-logs-arriving.png)
+![Apache access logs arriving in Kibana Discover]
 
 **Troubleshooting note:** Apache stopped responding once mid-session (`ERR_CONNECTION_REFUSED` on `localhost`) — resolved simply by restarting the Apache service from the XAMPP Control Panel. No configuration change was needed; this is a known intermittent behavior when a competing process briefly holds port 80.
 
