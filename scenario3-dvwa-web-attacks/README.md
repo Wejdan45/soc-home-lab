@@ -86,14 +86,14 @@ https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.4.33/
 
 Installed with default components selected: **Apache, MySQL, PHP, phpMyAdmin** (FileZilla, Mercury, Tomcat left enabled by default but unused).
 
-![XAMPP installer — Select Components](screenshots/xampp-select-components-installer.png)
+![XAMPP installer — Select Components](xampp-select-components-installer.png)
 
-![XAMPP Control Panel installed and ready](screenshots/xampp-control-panel-installed.png)
-![XAMPP Control Panel — Apache & MySQL running with assigned ports](screenshots/xampp-control-panel-running-detail.png)
+![XAMPP Control Panel installed and ready](xampp-control-panel-installed.png)
+![XAMPP Control Panel — Apache & MySQL running with assigned ports](xampp-control-panel-running-detail.png)
 
 When prompted by Windows Defender Firewall, access was allowed for **Private networks**:
 
-![Allowing Apache through Windows Defender Firewall](screenshots/windows-firewall-allow-apache.png)
+![Allowing Apache through Windows Defender Firewall](windows-firewall-allow-apache.png)
 
 **Apache** and **MySQL** were started from the XAMPP Control Panel. Verified working via:
 ```
@@ -108,8 +108,8 @@ https://github.com/digininja/DVWA → Code → Download ZIP
 
 Extracted `DVWA-master.zip`, confirmed the correct file structure (`config`, `database`, `dvwa`, `login.php`, `setup.php`, etc.):
 
-![DVWA extracted files — part 1](screenshots/dvwa-master-extracted-files-1.png)
-![DVWA extracted files — part 2](screenshots/dvwa-master-extracted-files-2.png)
+![DVWA extracted files — part 1](dvwa-master-extracted-files-1.png)
+![DVWA extracted files — part 2](dvwa-master-extracted-files-2.png)
 
 All contents of the inner `DVWA-master\DVWA-master` folder were copied into:
 ```
@@ -172,8 +172,8 @@ Custom Logs (Filestream)
 
 (the older plain **"Custom Logs"** entry is deprecated in favor of Filestream, which has better performance and ongoing support)
 
-![Selecting Custom Logs (Filestream) integration](screenshots/fleet-add-custom-logs-filestream-1.png)
-![Naming the integration](screenshots/fleet-add-custom-logs-filestream-2.png)
+![Selecting Custom Logs (Filestream) integration](fleet-add-custom-logs-filestream-1.png)
+![Naming the integration](fleet-add-custom-logs-filestream-2.png)
 
 ### Configure the log path
 
@@ -182,11 +182,11 @@ Under **Custom Filestream Logs → Paths**:
 C:\xampp\apache\logs\access.log
 ```
 
-![Filestream path configuration](screenshots/fleet-apache-filestream-path-config.png)
+![Filestream path configuration](fleet-apache-filestream-path-config.png)
 
 Integration name set to `apache-access-logs`, added to the `windows-victim-policy`:
 
-![Integration listed in the policy](screenshots/fleet-integrations-list-apache-access-logs.png)
+![Integration listed in the policy](fleet-integrations-list-apache-access-logs.png)
 
 ### Verify data is arriving
 
@@ -195,7 +195,7 @@ Generated traffic by opening a DVWA page, then queried Kibana Discover:
 log.file.path: "C:\\xampp\\apache\\logs\\access.log"
 ```
 
-![Apache access logs arriving in Kibana Discover](screenshots/kibana-apache-access-logs-arriving.png)
+![Apache access logs arriving in Kibana Discover](kibana-apache-access-logs-arriving.png)
 
 **Troubleshooting note:** Apache stopped responding once mid-session (`ERR_CONNECTION_REFUSED` on `localhost`) — resolved simply by restarting the Apache service from the XAMPP Control Panel. No configuration change was needed; this is a known intermittent behavior when a competing process briefly holds port 80.
 
@@ -226,7 +226,7 @@ Pablo / Picasso
 Bob / Smith
 ```
 
-![DVWA SQL Injection — full results returned for all users](screenshots/dvwa-sqli-full-results.png)
+![DVWA SQL Injection — full results returned for all users](dvwa-sqli-full-results.png)
 
 **Evidence — Apache access.log (Kibana Discover):**
 ```
@@ -234,7 +234,7 @@ GET /dvwa/vulnerabilities/sqli/?id=1%27+OR+%271%27%3D%271&Submit=Submit HTTP/1.1
 ```
 (`%27` = `'`, `%3D` = `=` — full payload preserved in the URL since this is a GET request)
 
-![Kibana Discover — SQL Injection payload captured in Apache access log](screenshots/kibana-sqli-detected-query.png)
+![Kibana Discover — SQL Injection payload captured in Apache access log](kibana-sqli-detected-query.png)
 
 **Detection query:**
 ```
@@ -252,11 +252,11 @@ data_stream.dataset: "apache.access" and message: *%27*OR*%27*
 <script>alert('XSS Test')</script>
 ```
 
-![DVWA Reflected XSS — payload entered in the name field](screenshots/dvwa-xss-reflected-payload-input.png)
+![DVWA Reflected XSS — payload entered in the name field](dvwa-xss-reflected-payload-input.png)
 
 **Result:** a JavaScript alert box fired in the browser, confirming the input was reflected back into the page and executed as active script rather than rendered as inert text.
 
-![Browser alert box confirming successful XSS execution](screenshots/dvwa-xss-alert-popup-success.png)
+![Browser alert box confirming successful XSS execution](dvwa-xss-alert-popup-success.png)
 
 **Evidence — Apache access.log (Kibana Discover), two related entries:**
 
@@ -272,7 +272,7 @@ GET /dvwa/favicon.ico HTTP/1.1
 Referer: http://localhost/dvwa/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%28%27XSS+Test%27%29%3C%2Fscript%3E
 ```
 
-![Kibana Discover — XSS payload captured in Apache access log](screenshots/kibana-xss-detected-query.png)
+![Kibana Discover — XSS payload captured in Apache access log](kibana-xss-detected-query.png)
 
 **Detection query:**
 ```
